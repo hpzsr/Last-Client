@@ -1,11 +1,4 @@
-﻿using LuaInterface;
-using Newtonsoft.Json;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -36,19 +29,7 @@ public class MainScript : MonoBehaviour
 
         gameObject.transform.Find("BtnList/Button_activity").GetComponent<Button>().onClick.AddListener(()=> 
         {
-            // ToastScript.createToast("暂无活动");
-
-            LuaState lua = new LuaState();
-            lua.Start();
-            lua.DoFile("Activity.lua");
-            //LuaFunction luaFunc = lua.GetFunction("Activity_Test");
-            //luaFunc.BeginPCall();
-            //luaFunc.Push(123456);
-            //luaFunc.PCall();
-            //Debug.Log(luaFunc.CheckNumber().ToString());
-            //luaFunc.EndPCall();
-            lua.Collect();
-            lua.CheckTop();
+            ToastScript.createToast("暂无活动");
         });
 
         gameObject.transform.Find("BtnList/Button_bag").GetComponent<Button>().onClick.AddListener(() =>
