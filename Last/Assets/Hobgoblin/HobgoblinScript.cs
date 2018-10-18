@@ -6,12 +6,22 @@ using UnityEngine;
 
 class HobgoblinData
 {
-    public int HP_All = 20;
-    public int HP_Cur = 20;
-    public int Atk = 5;
-    public float Speed = 0.005f;
-    public float AttackRange = 3;
-    public float AttackDur = 3.0f;
+    public int HP_All;
+    public int HP_Cur;
+    public int Atk;
+    public float Speed;
+    public float AttackRange;
+    public float AttackDur;
+
+    public HobgoblinData()
+    {
+        HP_All = 20;
+        HP_Cur = HP_All;
+        Atk = 5;
+        Speed = 0.005f;
+        AttackRange = 3;
+        AttackDur = 3.0f;
+    }
 }
 
 public class HobgoblinScript : MonoBehaviour {
@@ -41,8 +51,18 @@ public class HobgoblinScript : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update ()
+    void LateUpdate()
     {
+        if (isDie)
+        {
+            return;
+        }
+
+        if (!CharacterController.isGrounded)
+        {
+            CharacterController.Move(Vector3.down * 10.0f);
+        }
+
         // 在攻击范围内寻找攻击的对象
         {
             if ((gameObject == null) || (GameScript.s_script.HeroList == null))
@@ -99,6 +119,11 @@ public class HobgoblinScript : MonoBehaviour {
 
     public void Move(float angle)
     {
+        if (isDie)
+        {
+            return;
+        }
+
         string animString = Animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
         if (animString.Length >= 4)
         {
@@ -129,7 +154,11 @@ public class HobgoblinScript : MonoBehaviour {
 
     public bool Damage(int hitValue)
     {
-        Debug.Log("Damage");
+        if (isDie)
+        {
+            return false;
+        }
+
         // 动画
         {
             ShowAnimation("idle01");
@@ -177,11 +206,27 @@ public class HobgoblinScript : MonoBehaviour {
 
     public void onTriggerAttack()
     {
+        if (isDie)
+        {
+            return;
+        }
+
+        if (m_curAttackTarget == null)
+        {
+            return;
+        }
+
         // 击杀
         if (m_curAttackTarget.GetComponent<HeroScript>().Damage(hobgoblinData.Atk))
         {
             m_curAttackTarget.GetComponent<HeroScript>().Die();
             GameScript.s_script.HeroList.Remove(m_curAttackTarget);
+            m_curAttackTarget = null;
         }
+    }
+
+    public void onDieEnd()
+    {
+        Destroy(gameObject);
     }
 }

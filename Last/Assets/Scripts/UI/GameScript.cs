@@ -7,8 +7,7 @@ using UnityEngine.UI;
 public class GameScript : MonoBehaviour {
 
     public static GameScript s_script;
-
-    public GameObject GameObj = null;
+    
     public GameObject AttackBtnList = null;
     public GameObject GameUI = null;
 
@@ -28,35 +27,50 @@ public class GameScript : MonoBehaviour {
     {
         {
             s_script = transform.GetComponent<GameScript>();
-
-            GameObj = GameObject.Find("Game").gameObject;
+            
             AttackBtnList = transform.Find("AttackBtnList").gameObject;
             GameUI = transform.Find("UI").gameObject;
         }
 
-        // 
-        {
-            GameObject obj = Resources.Load("Prefabs/Role/Hoshi") as GameObject;
-            GameObject role = Instantiate(obj, GameObject.Find("Game").transform);
-            role.transform.localPosition = new Vector3(-7.44f, 0, -7.2f);
-            role.transform.localScale = new Vector3(3, 3, 3);
-            role.transform.localRotation = Quaternion.Euler(0, 90, 0);
+        //// 创建PVP英雄
+        //{
+        //    GameObject obj = GameUtil.CreatePVPHero();
 
-            HeroList.Add(role);
-            heroScript = role.GetComponent<HeroScript>();
+        //    HeroList.Add(obj);
+        //    heroScript = obj.GetComponent<HeroScript>();
+        //    heroScript.addBloodBar();
+        //}
+
+        // 创建地牢英雄
+        {
+            GameObject obj = GameUtil.CreateDiLaoHero();
+            HeroList.Add(obj);
+            heroScript = obj.GetComponent<HeroScript>();
             heroScript.addBloodBar();
+            heroScript.heroData.Speed = 0.02f;
+
+            GameObject.Find("Main Camera").GetComponent<TrackGameObjScript>().startTrack(obj);
+            GameObject.Find("Lights").GetComponent<TrackGameObjScript>().startTrack(obj);
         }
 
-        // 
+        // 怪物1
         {
-            GameObject obj = Resources.Load("Prefabs/Role/Hobgoblin") as GameObject;
-            GameObject role = Instantiate(obj, GameObject.Find("Game").transform);
-            role.transform.localPosition = new Vector3(8.1f, 0, -7.2f);
-            role.transform.localScale = new Vector3(0.22f, 0.22f, 0.22f);
-            role.transform.localRotation = Quaternion.Euler(0, -90, 0);
+            GameObject obj = GameUtil.CreateEnemy();
+            obj.transform.localPosition = new Vector3(11.92f, -4.61f, 20f);
 
-            HobgoblinList.Add(role);
-            role.GetComponent<HobgoblinScript>().addBloodBar();
+            obj.transform.localRotation = Quaternion.Euler(0, -90, 0);
+            HobgoblinList.Add(obj);
+            obj.GetComponent<HobgoblinScript>().addBloodBar();
+        }
+
+        // 怪物2
+        {
+            GameObject obj = GameUtil.CreateEnemy();
+            obj.transform.localPosition = new Vector3(-11.92f, -4.61f, 20f);
+            obj.transform.localRotation = Quaternion.Euler(0, 90, 0);
+
+            HobgoblinList.Add(obj);
+            obj.GetComponent<HobgoblinScript>().addBloodBar();
         }
     }
 

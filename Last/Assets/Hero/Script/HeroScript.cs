@@ -2,20 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-class HeroData
+public class HeroData
 {
-    public int HP_All = 20;
-    public int HP_Cur = 20;
-    public int Atk = 5;
-    public float Speed = 0.015f;
-    public float AttackRange = 4;
+    public int HP_All;
+    public int HP_Cur;
+    public int Atk;
+    public float Speed;
+    public float AttackRange;
+
+    public HeroData()
+    {
+        HP_All = 500;
+        HP_Cur = HP_All;
+        Atk = 5;
+        Speed = 0.015f;
+        AttackRange = 4;
+    }
 }
 
 public class HeroScript : MonoBehaviour {
 
     Animator Animator = null;
     CharacterController CharacterController = null;
-    HeroData heroData = new HeroData();
+    public HeroData heroData = new HeroData();
     BloodBarScript bloodBarScript;
 
     bool isDie = false;
@@ -28,9 +37,12 @@ public class HeroScript : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update ()
+	void LateUpdate ()
     {
-       
+        if (!CharacterController.isGrounded)
+        {
+            CharacterController.Move(Vector3.down * 10.0f);
+        }
     }
 
     public void addBloodBar()

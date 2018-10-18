@@ -255,7 +255,8 @@ MonoBehaviour:
   AttackBtnList: {fileID: 0}
   GameUI: {fileID: 0}
   heroScript: {fileID: 0}
-  hobgoblinScript: {fileID: 0}
+  HeroList: []
+  HobgoblinList: []
 --- !u!114 &114076125116039922
 MonoBehaviour:
   m_ObjectHideFlags: 1

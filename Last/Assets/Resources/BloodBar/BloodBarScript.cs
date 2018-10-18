@@ -32,7 +32,7 @@ public class BloodBarScript : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update ()
+	void LateUpdate()
     {
         if (m_parent != null)
         {

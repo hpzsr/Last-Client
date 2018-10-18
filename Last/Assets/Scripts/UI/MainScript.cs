@@ -54,7 +54,8 @@ public class MainScript : MonoBehaviour
 
         gameObject.transform.Find("BtnList/Button_zhanyi").GetComponent<Button>().onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("GameScene");
+            //SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("DiLaoScene");
         });
 
         gameObject.transform.Find("Head/Button").GetComponent<Button>().onClick.AddListener(() =>
