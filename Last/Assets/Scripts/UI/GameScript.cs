@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameScript : MonoBehaviour {
 
     public static GameScript s_script;
-    
+
+    public GameObject MainCamera;
     public GameObject AttackBtnList = null;
     public GameObject GameUI = null;
 
@@ -27,7 +29,8 @@ public class GameScript : MonoBehaviour {
     {
         {
             s_script = transform.GetComponent<GameScript>();
-            
+
+            MainCamera = GameObject.Find("Main Camera");
             AttackBtnList = transform.Find("AttackBtnList").gameObject;
             GameUI = transform.Find("UI").gameObject;
         }
@@ -72,6 +75,9 @@ public class GameScript : MonoBehaviour {
             HobgoblinList.Add(obj);
             obj.GetComponent<HobgoblinScript>().addBloodBar();
         }
+        
+        //Debug.Log(Mathf.Sin(Mathf.Deg2Rad * 0));
+        //Debug.Log(Mathf.Cos(Mathf.Deg2Rad * 0));
     }
 
     void registerEvent()
@@ -148,7 +154,11 @@ public class GameScript : MonoBehaviour {
 
     void RockerEvent_Move(float angle)
     {
-        heroScript.Move(angle);
+        /*
+         * 为什么要+相机的角度？
+         * 因为场景旋转（其实是相机旋转）后，摇杆的方向就跟实际的偏移了
+         */
+        heroScript.Move(angle + MainCamera.transform.localEulerAngles.y);
     }
 
     void RockerEvent_Reset()

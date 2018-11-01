@@ -26,7 +26,7 @@ public class TrackGameObjScript : MonoBehaviour
 
     void LateUpdate()
     {
-        if(m_isTrack && (m_target != null))
+        if (m_isTrack && (m_target != null))
         {
             if (m_damping > 0)
             {
@@ -34,7 +34,7 @@ public class TrackGameObjScript : MonoBehaviour
                 Vector3 position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * m_damping);
                 transform.position = position;
 
-                transform.LookAt(m_target.transform.position);
+                //transform.LookAt(m_target.transform.position);
             }
             else
             {
@@ -42,5 +42,13 @@ public class TrackGameObjScript : MonoBehaviour
                 transform.position = desiredPosition;
             }
         }
+    }
+
+    public void RotateAround(float angle)
+    {
+        transform.RotateAround(m_target.transform.position, Vector3.up, angle);
+        m_target.GetComponent<HeroScript>().Rotate(angle);
+
+        offset = transform.position - m_target.transform.position;
     }
 }

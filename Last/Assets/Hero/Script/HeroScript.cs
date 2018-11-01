@@ -60,6 +60,11 @@ public class HeroScript : MonoBehaviour {
         Animator.Play(name);
     }
 
+    public void Rotate(float angle)
+    {
+        transform.Rotate(new Vector3(0, angle, 0));
+    }
+
     public void Move(float angle)
     {
         string animString = Animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
@@ -74,7 +79,7 @@ public class HeroScript : MonoBehaviour {
         transform.rotation = Quaternion.Euler(0, angle, 0);
 
         ShowAnimation("Run");
-        CharacterController.Move(gameObject.transform.forward * (Time.deltaTime * heroData.Speed * 2 / (1.0f / 60.0f)) * 4);
+        CharacterController.Move(transform.forward * (Time.deltaTime * heroData.Speed * 2 / (1.0f / 60.0f)) * 4);
     }
 
     public void FlashMove()
