@@ -20,7 +20,7 @@ class SocketEvent_C
 
                 switch (csBaseData.Tag)
                 {
-                    case (int)Consts.NetTag.Login:
+                    case (int)CSParam.NetTag.Login:
                         {
                             S2C_Login s2c = JsonConvert.DeserializeObject<S2C_Login>(data);
                             PlayerData.UserInfoData.Id = s2c.Id;
@@ -30,7 +30,7 @@ class SocketEvent_C
                         }
                         break;
 
-                    case (int)Consts.NetTag.UserInfo:
+                    case (int)CSParam.NetTag.UserInfo:
                         {
                             S2C_UserInfo s2c = JsonConvert.DeserializeObject<S2C_UserInfo>(data);
                             PlayerData.UserInfoData = s2c.UserInfoData;
@@ -38,13 +38,13 @@ class SocketEvent_C
                         }
                         break;
 
-                    case (int)Consts.NetTag.ChangeEquip:
+                    case (int)CSParam.NetTag.ChangeEquip:
                         {
                             
                         }
                         break;
 
-                    case (int)Consts.NetTag.Sign:
+                    case (int)CSParam.NetTag.Sign:
                         {
                             S2C_Sign s2c = JsonConvert.DeserializeObject<S2C_Sign>(data);
                             PlayerData.UserInfoData.Gold += CommonUtil.splitStr_End(s2c.Reward, ':');

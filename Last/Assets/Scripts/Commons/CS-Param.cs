@@ -1,6 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
+public class CSParam
+{
+    public enum NetTag
+    {
+        Login,
+        UserInfo,
+        Bag,
+        ChangeEquip,
+        Sign,
+    }
+}
+
 public class UserInfoData
 {
     public string Id;

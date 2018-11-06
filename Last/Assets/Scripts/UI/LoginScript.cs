@@ -110,10 +110,11 @@ public class LoginScript : MonoBehaviour {
     public void reqLogin()
     {
         C2S_Login c2s = new C2S_Login();
-        c2s.Tag = (int)Consts.NetTag.Login;
+        c2s.Tag = (int)CSParam.NetTag.Login;
         c2s.DeviceId = SystemInfo.deviceUniqueIdentifier;
-
+        
         Socket_C.getInstance().Send(c2s);
+        
     }
 
     public void setCurServer(ServerData data)

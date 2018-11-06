@@ -222,7 +222,7 @@ public class PlayerInfoScript : MonoBehaviour {
     public void reqChangeEquip()
     {
         C2S_ChangeEquip c2s = new C2S_ChangeEquip();
-        c2s.Tag = (int)Consts.NetTag.ChangeEquip;
+        c2s.Tag = (int)CSParam.NetTag.ChangeEquip;
         c2s.DeviceId = PlayerData.UserInfoData.Id;
         c2s.EquipList = PlayerData.UserInfoData.EquipList;
         c2s.BagList = PlayerData.UserInfoData.BagList;

@@ -44,7 +44,7 @@ public class TouchLayerScript : MonoBehaviour {
 
     void touchMove(Vector3 posVec3)
     {
-        if (posVec3.y < (Screen.height * 0.7f))
+        if (posVec3.y < (Screen.height * 0.8f))
         {
             return;
         }

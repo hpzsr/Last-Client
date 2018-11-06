@@ -79,7 +79,7 @@ public class MainScript : MonoBehaviour
     public void reqUserInfo()
     {
         C2S_UserInfo c2s = new C2S_UserInfo();
-        c2s.Tag = (int)Consts.NetTag.UserInfo;
+        c2s.Tag = (int)CSParam.NetTag.UserInfo;
         c2s.DeviceId = PlayerData.UserInfoData.Id;
 
         Socket_C.getInstance().Send(c2s);

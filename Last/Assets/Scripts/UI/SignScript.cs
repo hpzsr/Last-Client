@@ -36,7 +36,7 @@ public class SignScript : MonoBehaviour {
     public void reqSign()
     {
         C2S_Sign c2s = new C2S_Sign();
-        c2s.Tag = (int)Consts.NetTag.Sign;
+        c2s.Tag = (int)CSParam.NetTag.Sign;
         c2s.Id = PlayerData.UserInfoData.Id;
 
         Socket_C.getInstance().Send(c2s);
